@@ -1,14 +1,11 @@
-# Welcome to your CDK TypeScript project
+# Minecraftサーバの管理ツール
 
-This is a blank project for TypeScript development with CDK.
+## 実装した機能
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+* Minecraftサーバに誰かがログインしたらSlackに通知する
 
-## Useful commands
+## 環境作成方法
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+こちらをご覧ください．
+
+[Minecraftサーバへのユーザ参加をSlackに通知する with Fluentd and CDK | ottijp blog](https://blog.ottijp.com/2022/03/08/minecraft-notifier/)
