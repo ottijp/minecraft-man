@@ -1,4 +1,5 @@
-const { IncomingWebhook } = require('@slack/webhook');
+const SlackWebhook = require('@slack/webhook').IncomingWebhook;
+const DiscordWebhook = require('discord-webhook-node').Webhook;
 
 function joinedUser(line) {
   const match = line.match(/^\[.{8}\].*: (.+) joined the game$/)
@@ -8,10 +9,21 @@ function joinedUser(line) {
 async function postToSlack(userName) {
   console.log('post to slack', userName)
   const url = process.env.SLACK_WEBHOOK_URL;
-  const webhook = new IncomingWebhook(url);
-  await webhook.send({
-    text: `${userName} がログインしました`
-  })
+  if (url) {
+    const webhook = new SlackWebhook(url);
+    await webhook.send({
+      text: `${userName} がログインしました`
+    })
+  }
+}
+
+async function postToDiscord(userName) {
+  console.log('post to discord', userName)
+  const url = process.env.DISCORD_WEBHOOK_URL;
+  if (url) {
+    const webhook = new DiscordWebhook(url);
+    await webhook.send(`${userName} がログインしました`);
+  }
 }
 
 exports.handler = async (event) => {
@@ -22,6 +34,7 @@ exports.handler = async (event) => {
       const userName = joinedUser(log)
       if (userName) {
         await postToSlack(userName)
+        await postToDiscord(userName)
       }
     }
     catch (e) {

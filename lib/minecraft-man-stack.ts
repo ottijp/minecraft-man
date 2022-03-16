@@ -16,6 +16,7 @@ export class MinecraftManStack extends Stack {
       code: lambda.Code.fromAsset('resources'),
       environment: {
         SLACK_WEBHOOK_URL: this.node.tryGetContext('slackWebhookUrl') as string,
+        DISCORD_WEBHOOK_URL: this.node.tryGetContext('discordWebhookUrl') as string,
       },
     });
 
