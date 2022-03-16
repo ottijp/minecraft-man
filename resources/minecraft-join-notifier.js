@@ -17,9 +17,9 @@ async function postToSlack(userName) {
 exports.handler = async (event) => {
   for (const record of event.Records) {
     try {
-      const log = JSON.parse(Buffer.from(record.kinesis.data, 'base64').toString())
+      const log = JSON.parse(record.body).message
       console.log('minecraft log record', log)
-      const userName = joinedUser(log.message)
+      const userName = joinedUser(log)
       if (userName) {
         await postToSlack(userName)
       }
