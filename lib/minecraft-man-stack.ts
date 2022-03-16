@@ -12,8 +12,8 @@ export class MinecraftManStack extends Stack {
     // ログ解析用のファンクション
     const lambdaFunction = new lambda.Function(this, 'minecraft-join-notifier', {
       runtime: lambda.Runtime.NODEJS_14_X,
-      handler: 'index.handler',
-      code: lambda.Code.fromAsset(path.join(__dirname, 'minecraft-join-notifier')),
+      handler: 'minecraft-join-notifier.handler',
+      code: lambda.Code.fromAsset('resources'),
       environment: {
         SLACK_WEBHOOK_URL: this.node.tryGetContext('slackWebhookUrl') as string,
       },
